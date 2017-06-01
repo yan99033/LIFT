@@ -1,5 +1,16 @@
 # LIFT: Learned Invariant Feature Points
 
+This is a modified project by Shing-Yan Loo (lsyan@ualberta.ca). The intention is to combine the keypoint detection and description into a single pipeline.
+
+To run the program simply
+```bash
+./run_live.sh
+```
+
+To draw the matches between two images, use the **drawmatches.py** in the folder.
+
+_The implementation of deep network is slow, it is not suitable for real-time processing. 
+
 This software is a Python implementation of the LIFT feature point presented in [1].
 
 [1] K.  M.  Yi, E. Trulls, V. Lepetit, and P.  Fua.  "LIFT: Learned Invariant Feature Transform", European Conference on Computer Vision (ECCV), 2016.
