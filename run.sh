@@ -31,8 +31,8 @@ export _LIFT_BASE_PATH="$(pwd)"
 _LIFT_PYTHON_CODE_PATH="${_LIFT_BASE_PATH}/python-code"
 
 # Test image and model settings
-_LIFT_TEST_IMG_NAME="img1"
-_LIFT_TEST_IMG="${_LIFT_BASE_PATH}/data/testimg/${_LIFT_TEST_IMG_NAME}.jpg"
+_LIFT_TEST_IMG_NAME="0"
+_LIFT_TEST_IMG="${_LIFT_BASE_PATH}/data/frames/${_LIFT_TEST_IMG_NAME}.png"
 _LIFT_TEST_CONFIG="${_LIFT_BASE_PATH}/models/configs/picc-finetune-nopair.config"
 _LIFT_MODEL_DIR="${_LIFT_BASE_PATH}/models/picc-best/"
 

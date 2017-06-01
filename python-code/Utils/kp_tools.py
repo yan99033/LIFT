@@ -248,6 +248,51 @@ def loadKpListFromTxt(kp_file_name):
 
     return kp_list
 
+def loadKpListFromTxt2(kp_list):
+
+    kp_list = []
+    num_elem = -1
+    for kp_line in kp_list:
+
+        # split read information
+        kp_info = kp_line.split()
+        parsed_kp_info = []
+        for idx in six.moves.xrange(len(kp_info)):
+            parsed_kp_info += [float(kp_info[idx])]
+        parsed_kp_info = np.asarray(parsed_kp_info)
+
+        if num_elem == -1:
+            num_elem = len(parsed_kp_info)
+        else:
+            assert num_elem == len(parsed_kp_info)
+
+        # IMPORTANT: make sure this part corresponds to the one in
+        # opencv_kp_list_2_kp_list
+
+        # check if we have all the kp list info
+        if len(parsed_kp_info) == 6:  # if we only have opencv info
+            # Compute a,b,c for vgg affine
+            a = 1. / (parsed_kp_info[IDX_SIZE]**2)
+            b = 0.
+            c = 1. / (parsed_kp_info[IDX_SIZE]**2)
+            parsed_kp_info = np.concatenate((parsed_kp_info, [a, b, c]))
+
+        if len(parsed_kp_info) == 9:  # if we don't have the Affine warp
+            parsed_kp_info = np.concatenate((parsed_kp_info, np.zeros((4, ))))
+            parsed_kp_info = update_affine(parsed_kp_info)
+
+        # if len(parsed_kp_info) == 13:
+        #     # add dummy class id
+        #     parsed_kp_info = np.concatenate((parsed_kp_info, [0]))
+
+        # make sure we have everything!
+        assert len(parsed_kp_info) == KP_LIST_LEN
+
+        kp_list += [parsed_kp_info]
+
+
+    return kp_list
+
 
 def saveKpListToTxt(kp_list, orig_kp_file_name, kp_file_name):
 
